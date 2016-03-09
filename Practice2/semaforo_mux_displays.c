@@ -12,7 +12,7 @@ void interrupt interrupcao();
 void semaforo_carros(int time);                 //Method to control the traffic lights for cars
 void semaforo_pedestre(int time);               //Method to control the traffic lights for pedestrians
 void count_display(int time, int forward);      //Method that counts a display increasingly or decreasingly for one 7seg-display
-void count_display_mux(int time, int forward);  ////Method that counts a display increasingly or decreasingly by multiplexing 2 7seg-displays.
+void count_display_mux(int time, int forward);  //Method that counts increasingly or decreasingly by multiplexing 2 7seg-displays.
 
 void main(){
 
@@ -74,7 +74,7 @@ void semaforo_carros(int time){
     nivel_baixo(pin_a0);
     nivel_baixo(pin_a2);
 
-    //Not such a good idea to do this calculation: time-time*.5 in the method tempo_ms, but... here we go...
+    //Not such a good idea to do this calculation: time-time*.5 in the method tempo_ms(), but... here we go...
     tempo_ms(time-time*.5);
 
     //Vermelho
@@ -118,7 +118,7 @@ void semaforo_pedestre(int time){
     while(i){//Pisca por algum tempo pra alertar pedestres
         i--;
 
-        //On the top of blinking and counting we added a buzzer to indicate the green led is gonna to switch soon.
+        //On the top of blinking and counting we added a buzzer to indicate the green led is gonna switch soon.
         inverte_saida(pin_a5);//buzzer
         inverte_saida(pin_a4);
         tempo_ms(300);
@@ -143,10 +143,11 @@ void count_display(int time, int forward){
 
     unsigned char set_segF[10] = {0x7D,0x0C,0xB5,0x9D,0xCC,
                                  0xD9,0xF9,0x0D,0xFD,0xDD};
-                                 //{9, }
+                                //{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 
     unsigned char set_segB[10] = {0xDD,0xFD,0x0D,0xF9,0xD9,
                                   0xCC,0x9D,0xB5,0x0C,0x7D};
+                                //{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}   
     int i;
     for(i = 0; i<10; i++){
 

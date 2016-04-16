@@ -1,0 +1,2 @@
+Comunicando microcontrolador-smartphone via Bluetooth:
+	https://www.youtube.com/watch?v=-Miyo-G48yE&feature=youtu.be
